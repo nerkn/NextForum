@@ -1,0 +1,62 @@
+{
+  "version": "5",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1692698438640,
+      "tag": "0000_violet_annihilus",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1692700150399,
+      "tag": "0001_last_lionheart",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1692721333654,
+      "tag": "0002_slim_mister_sinister",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1692728842055,
+      "tag": "0003_tired_king_cobra",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1692731639647,
+      "tag": "0004_loose_vapor",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1692731806704,
+      "tag": "0005_classy_rage",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1692805001679,
+      "tag": "0006_graceful_rogue",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "5",
+      "when": 1693054844108,
+      "tag": "0007_hot_psylocke",
+      "breakpoints": true
+    }
+  ]
+}

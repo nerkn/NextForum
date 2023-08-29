@@ -1,0 +1,1 @@
+ALTER TABLE `groups` ADD `slug` varchar(255);

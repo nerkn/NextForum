@@ -1,0 +1,32 @@
+
+GET http://localhost:3017/api/auth
+
+###
+POST  http://localhost:3017/api/auth/login
+Content-Type: application/json
+
+{"email":"erkintek@gmail.com", "password":"123456"}
+
+
+###
+POST  http://localhost:3017/api/auth/login
+Content-Type: application/json
+
+{"email":"john.doe@example.com", "password":"johndoe123"} 
+
+###
+GET http://localhost:3017/api/groups
+
+###
+GET https://api.unsplash.com/search/photos/?query=smile&page=2
+Authorization: Client-ID DqsqgzFiQ3KCLL29vzA3jbxPyG2w9-nZRkXI_DB-I1w
+
+
+
+
+
+###             Likes
+POST  http://localhost:3017/api/likes
+Content-Type: application/json
+
+{"app":"dene", "bin":"default", likee:123} 
