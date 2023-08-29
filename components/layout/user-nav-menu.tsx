@@ -20,6 +20,7 @@ import { authStore } from "@/lib/context/auth"
 import useStore from "@/lib/useStore"
 import { likeStore } from "@/lib/context/LikeStore"
 import { useEffect } from "react"
+import Link from "next/link"
   
   export function UserNavMenu() {
     const auth = useStore(authStore, (s=>({user:s.user, login:s.login, userId:s?.user?.userId})))
@@ -47,9 +48,10 @@ import { useEffect } from "react"
           <UserNavMenuLogin />
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
-            <DropdownMenuItem>
-              Profile
+            <DropdownMenuItem >
+              <Link href="profile/userinfo"   >Profile
               <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+              </Link>
             </DropdownMenuItem>
             <DropdownMenuItem>
               Billing

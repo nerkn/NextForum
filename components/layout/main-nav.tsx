@@ -18,10 +18,10 @@ export function MainNav({
         Groups
       </Link>
       <Link
-        href="/examples/dashboard"
+        href="/users"
         className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
       >
-        Customers
+        Users
       </Link>
       <Link
         href="/examples/dashboard"

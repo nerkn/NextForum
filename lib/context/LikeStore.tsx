@@ -1,6 +1,5 @@
 import { InferSelectModel } from "drizzle-orm";
 import { create } from "zustand"; 
-import {persist} from "zustand/middleware" 
 import {likes } from "@/drizzle/schema"
 import { FetchRequestType } from "../types";
 
@@ -20,7 +19,7 @@ export type  likeStoreType ={
 }
 
 
-export const likeStore = create<likeStoreType>()( 
+export const LikeStore = create<likeStoreType>()( 
         (set, get)=>({
             userLikes:[], 
             userId:0,

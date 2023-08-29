@@ -3,8 +3,8 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { Input } from '@/components/ui/input'
-import { MainNav } from '@/components/gen/main-nav'
-import { UserNavMenu } from '@/components/gen/user-nav-menu'
+import { MainNav } from '@/components/layout/main-nav'
+import { UserNavMenu } from '@/components/layout/user-nav-menu'
 
 
 const inter = Inter({ subsets: ['latin'] })

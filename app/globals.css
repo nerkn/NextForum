@@ -6,6 +6,7 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
+    --background2: 20 10% 100%;
     --background-hover: 0 0% 90%; 
     --foreground: 240 10% 3.9%;
     --card: 0 0% 100%;
@@ -61,13 +62,20 @@
   }
 }
     .oneTopic{
-      @apply border-[1px] rounded-md mb-2 p-4 flex
+      @apply border-[1px] rounded-md mb-2 p-4 flex items-start
     }
     .oneTopic .description{
       @apply mx-1 rounded-md py-2  grow basis-3/5 flex flex-col justify-between min-h-[4m]
     }
     .oneTopic .description a{
       @apply text-lg font-semibold
+    }
+    .oneTopic .description img{
+      max-height: 40em;
+    }
+    
+    .oneTopic .description img:hover{
+      transform: scale(1.5);
     }
     .oneTopic .actions{ 
       @apply basis-1/12  flex flex-col items-end
@@ -78,3 +86,12 @@
     .animation1{
         animation: 3s infinite alternate slidein;
     }
+
+    
+  .mention {
+    border: 1px solid #000;
+    border-radius: 0.4rem;
+    box-decoration-break: clone;
+    padding: 0.1rem 0.3rem;
+  }
+    

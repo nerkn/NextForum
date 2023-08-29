@@ -3,7 +3,7 @@ import { formSubmit, slugify } from "@/lib/utils"
 import { ChangeEvent, FormEventHandler, useState } from "react"
 import { useToast } from "../ui/use-toast"
 import { Button } from "../ui/button"
-import Tiptap from "./tiktapEditor" 
+import Tiptap from "./tiktapEditor/tiktapEditor" 
 import { userType } from "@/lib/types"
 
 type formData = {
@@ -45,9 +45,10 @@ export function Editor({ type, data, mentionUsers}:{
         <Tiptap  
             content=''
             mentionUsers={mentionUsers}
-            onUpdate={({editor})=>descSet(JSON.stringify(editor.getJSON(),  null, "\t"))}
+            onUpdate={({editor})=>descSet(JSON.stringify(editor.getJSON()))}
+            readOnly={false}
              />
-        <textarea value={desc} name="description" className="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"></textarea>
+        <textarea value={desc} readOnly={true} name="description" className="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"></textarea>
         <Button type="submit" value="Submit" className="" variant="default" > Submit</Button>
     </form>
 }

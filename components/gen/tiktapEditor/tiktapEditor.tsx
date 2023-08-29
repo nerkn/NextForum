@@ -3,18 +3,19 @@
 import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import Mention from '@tiptap/extension-mention'
-import suggestion from "./tiktapEditor/suggestions"
-import "./tiktapEditor/mention.css"
+import suggestion from "./suggestions"
+import "./mention.css"
 import { userType } from '@/lib/types'
 import {Editor}   from '@tiptap/core'
 
 import {Image} from '@tiptap/extension-image'
 import { Transaction } from '@tiptap/pm/state'
 
-const Tiptap = ({content, mentionUsers,onUpdate}:
+const Tiptap = ({content, mentionUsers, onUpdate, readOnly=false}:
   {
     content:string, 
     mentionUsers:userType[],
+    readOnly:boolean,
     onUpdate:((props: {
       editor: Editor;
       transaction: Transaction;
@@ -42,7 +43,7 @@ const Tiptap = ({content, mentionUsers,onUpdate}:
     return null
   }
   return (
-    <EditorContent name='desc' editor={editor} />
+    <EditorContent name='desc' editor={editor} readOnly={readOnly} />
   )
 }
 

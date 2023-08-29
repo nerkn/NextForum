@@ -21,13 +21,9 @@
   .item.is-selected {
     border-color: #000;
   }
+  .tiptap {
+    padding: .5em;
+  }
   .tiptap > * + * {
     margin-top: 0.75em;
   }
-  .mention {
-    border: 1px solid #000;
-    border-radius: 0.4rem;
-    box-decoration-break: clone;
-    padding: 0.1rem 0.3rem;
-  }
-    

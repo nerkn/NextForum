@@ -39,3 +39,9 @@ declare module "next-auth" {
     userRoles?:string
   }
 }
+
+
+export type PostsWithUserT = {
+  posts: InferSelectModel<typeof posts>,
+  user:  userType|null
+}

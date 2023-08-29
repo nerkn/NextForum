@@ -54,10 +54,9 @@ function RenderUsers({u}:{u: userType[]}){
 }
 
 function RenderTable({groups}:{groups:returnType}){
-    
-    console.log('groups', groups.data)
+     
     return groups.data.popularGroups.map(group => (<>
-        <Card className="w-56 flex flex-col justify-between">
+        <Card className="flex flex-col justify-between basis-1/5">
             <CardHeader>
                 <CardTitle><Link href={`/group/${group.slug}`}  >{group.name}</Link>  </CardTitle>
                 <CardDescription>
@@ -76,12 +75,12 @@ function RenderTable({groups}:{groups:returnType}){
 }
 
 export default async function Page(){
-    const groups = await fetch('http://localhost:3017/api/groups', {next: { revalidate: 30 }}).then(r=>r.json()) 
+    const groups = await fetch('http://localhost:3017/api/groups' /*, {next: { revalidate: 3000 }}*/ ).then(r=>r.json()) 
     
-    console.log('groups',  groups )
+    
     return <>
     <h1>Popular groups</h1>
-    <div className="flex items-stretch justify-strech  flex-wrap gap-1">
+    <div className="flex  justify-between  flex-wrap gap-1">
          <RenderTable groups={groups} />
          </div>
     <form action="/api/images" method="post" encType="multipart/form-data" >

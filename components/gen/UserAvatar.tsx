@@ -2,7 +2,6 @@
 
 import { authStore } from "@/lib/context/auth";
 import useStore from "@/lib/useStore"
-import { likeStore } from "@/lib/context/LikeStore";
 
 export default function UserAvatar(){
 
@@ -10,5 +9,5 @@ export default function UserAvatar(){
 
     if(!currentUser?.user)
         return null
-    return  <img src={currentUser.user?.avatar} />;
+    return  <img src={currentUser.user?.avatar} className="max-w-24" />;
 }
