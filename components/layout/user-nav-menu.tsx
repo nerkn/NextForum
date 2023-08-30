@@ -18,13 +18,13 @@ import {
 import { UserNavMenuLogin } from "./user-nav-menu-login"
 import { authStore } from "@/lib/context/auth"
 import useStore from "@/lib/useStore"
-import { likeStore } from "@/lib/context/LikeStore"
+import { LikeStore } from "@/lib/context/LikeStore"
 import { useEffect } from "react"
 import Link from "next/link"
   
   export function UserNavMenu() {
     const auth = useStore(authStore, (s=>({user:s.user, login:s.login, userId:s?.user?.userId})))
-    const likes =  useStore(likeStore, (s=>({initilize: s.initialize, userId: s.userId})))
+    const likes =  useStore(LikeStore, (s=>({initilize: s.initialize, userId: s.userId})))
     useEffect(()=>{
       if(!auth || !likes)
         return

@@ -1,5 +1,5 @@
 "use client"
-import { likeStore } from "@/lib/context/LikeStore"
+import { LikeStore } from "@/lib/context/LikeStore"
 import { Button } from "../ui/button"
 import { HeartIcon } from "lucide-react"
 import { ReactNode } from "react"
@@ -10,7 +10,7 @@ async function getLike(){
 
 export function ButtonLike({app, bin, likee, positiveChild, absentChild}:
     {app:string, bin:string, likee:number, positiveChild:ReactNode, absentChild:ReactNode}){
-    const likes = likeStore(s=>({
+    const likes = LikeStore(s=>({
         stateUpdate:s.stateUpdate, 
         status:s.status, 
         initStatus:s.initStatus,

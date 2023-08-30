@@ -2,7 +2,6 @@
 import { ReturnError, ReturnNormal } from "@/lib/utils";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { getServerSession } from "next-auth/next";
-import { NextResponse } from "next/server";
 export async function GET() {
  
     try{

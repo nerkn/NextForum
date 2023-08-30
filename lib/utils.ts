@@ -68,3 +68,6 @@ export function fmtDate(dateString:string, long:boolean=false){
     new Date(dateString).getTime(),
     long);
 }
+export function Now(){
+  return new Date().toJSON().replace(/[TZ]/g, ' ')
+}

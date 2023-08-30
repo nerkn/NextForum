@@ -61,11 +61,18 @@
     @apply bg-background text-foreground;
   }
 }
+
+h1{ font-size: 2em; }
+h2{ font-size: 1.8em; }
+h3{ font-size: 1.6em; }
+h4{ font-size: 1.2em; }
+
+
     .oneTopic{
       @apply border-[1px] rounded-md mb-2 p-4 flex items-start
     }
     .oneTopic .description{
-      @apply mx-1 rounded-md py-2  grow basis-3/5 flex flex-col justify-between min-h-[4m]
+      @apply mx-1 rounded-md pb-2  grow basis-3/5 flex flex-col justify-between min-h-[4m]
     }
     .oneTopic .description a{
       @apply text-lg font-semibold

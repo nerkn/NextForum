@@ -1,25 +1,10 @@
 
-import {  posts, topics, user } from "@/drizzle/schema"; 
-import { eq } from "drizzle-orm";  
-import { db } from "@/lib/db";
+
 import { userType } from "@/lib/types";
 import { Editor } from "@/components/gen/editor"; 
 import { Places3 } from "@/components/gen/scheletons/Places3"; 
 import { PostsWithUser } from "@/components/modules/PostsWithUser";
-
-
-async function getTopic7slug(slug:string){
-    return await db.select().from(topics).where(eq(topics.slug, slug)).execute()
-}
-async function getPosts(topicid:number){
-    return await db.select({
-        posts:posts,
-        user:{id:user.id, name:user.name, avatar:user.avatar}
-        }).
-        from(posts).
-        leftJoin(user, eq(user.id, posts.user)).
-        where(eq(posts.topic, topicid)).orderBy(posts.createdAt)
-}
+import { getPosts, getTopic7slug } from "@/lib/services/groups";
 
 
 
@@ -29,7 +14,7 @@ export default async function Page({params}:{params:{slug:string}}) {
     const currentTopic =  await getTopic7slug(params.slug) 
     if(!currentTopic || !currentTopic.length)
         return <>Topic not found?</>
-
+    console.log('currentTopic', currentTopic)
     const posts = await getPosts(currentTopic[0].id) 
     let   users = [] as userType[]; 
     if(posts)
@@ -39,7 +24,8 @@ export default async function Page({params}:{params:{slug:string}}) {
                     users.push(post.user); 
             return users
         }, [] as userType[])
-    if(!posts || !posts.length)
+        console.log('topic posts', posts)
+    if(!posts  )
         return <></> 
     return <div>
         <div></div>

@@ -18,7 +18,7 @@ import { Button } from "../ui/button"
 import { authStore } from "@/lib/context/auth"
 import { DropdownMenuItem, DropdownMenuLabel } from "../ui/dropdown-menu"
 import useStore from "@/lib/useStore"
-import { likeStore } from "@/lib/context/LikeStore"
+import { LikeStore } from "@/lib/context/LikeStore"
  
 const formSchema = z.object({
   email: z.string().email().min(2, {
@@ -30,7 +30,7 @@ const formSchema = z.object({
 export function UserNavMenuLogin() {
   const auth = useStore( authStore, (s=>({RequestLogin:s.RequestLogin, user:s.user, login:s.login, logout:s.Logout })))
   
-  const likes = likeStore(s=>({initialize: s.initialize}))
+  const likes = LikeStore(s=>({initialize: s.initialize}))
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {

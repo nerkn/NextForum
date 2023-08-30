@@ -4,8 +4,8 @@ import path from "path";
 import { writeFile, mkdir, access, constants } from "fs/promises";
 import { db } from "../db";
 import { images } from "@/drizzle/schema";
-import { InferModel, eq } from "drizzle-orm";
-type ImageNewType = InferModel<typeof images, "insert">;
+import { InferInsertModel, eq } from "drizzle-orm";
+type ImageNewType = InferInsertModel<typeof images>;
 
 
 

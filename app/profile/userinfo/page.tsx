@@ -1,5 +1,6 @@
 import UserAvatar from "@/components/gen/UserAvatar"; 
 import { Likes } from "./likes";
+import ClientOnly from "@/components/ClientOnly";
 
 
 export default async function Page(){ 
@@ -12,7 +13,7 @@ export default async function Page(){
             <input type="submit" />
         </form>
         <div><h1>Likes</h1></div>
-        <div><Likes app="posts" /></div>
+        <div><Likes app="posts" bin="like" /></div>
     </div>
     )
 

@@ -1,19 +1,18 @@
 import { OneUser } from "@/components/user/oneUser";
-import { UserType, groups, topics, user } from "@/drizzle/schema";
-import { FetchRequestType } from "@/lib/types";
+import { groups, topics } from "@/drizzle/schema";
+import { getGroupTopics } from "@/lib/services/groups";
+import { userType, FetchRequestType } from "@/lib/types";
 import { fmtDate } from "@/lib/utils";
-import { InferSelectModel } from "drizzle-orm"; 
-import { format } from "@lukeed/ms";
-import { Button } from "@/components/ui/button";
+import { InferSelectModel } from "drizzle-orm";  
 
 type TopicWithUser = {
     topics: InferSelectModel<typeof topics>,
-    user:   UserType
+    user:   userType
 }
 type GroupAndTopics ={
     group:  InferSelectModel<typeof groups>;
     topics : TopicWithUser[];
-}
+} | null
 
 
 function Topics({topics}:{topics:TopicWithUser[]}) {
@@ -37,18 +36,17 @@ function Topics({topics}:{topics:TopicWithUser[]}) {
 export default async function Page({params}:{params:{slug:string}}) {
     if(!params || !params.slug || params.slug.replaceAll(/[\w|-]/g , ''))
         return <h1>There is a problem with slug</h1>
-    const groupAndTopics:FetchRequestType<GroupAndTopics> = 
-        await fetch(`http://localhost:3017/api/groups/${params.slug}`, 
-                    {cache:"no-cache"})
-            .then(r=>r.json())
-    if(!groupAndTopics || !groupAndTopics.data)
+    const groupAndTopics:GroupAndTopics =     await getGroupTopics(params.slug)
+    
+    console.log('groupAndTopics', groupAndTopics)
+    if(!groupAndTopics)
         return <></>
-        console.log(groupAndTopics.data.topics[0])
     return <div>
         <div></div>
         <div>
-            <h1>{groupAndTopics.data.group.name}</h1>
-            <Topics topics={groupAndTopics.data.topics} />
+            <h1>{groupAndTopics.group.name}</h1>
+            <div className="my-2 py-2 border-b">{groupAndTopics.group.description}</div>
+            <Topics topics={groupAndTopics.topics} />
         </div>
     </div>
     

@@ -5,6 +5,16 @@ export type FetchRequestType<T> ={
     msg:string,
     data:T
 }
+
+export type formDataFileBufferType = {
+  arrayBuffer: () => Promise<ArrayBuffer>,
+  size:number         // 116819
+  type: string,       // 'image/jpeg'
+  name: string,       // 'WhatsApp Image 2023-06-13 at 3.59.22 PM.jpg'
+  lastModified:number // 1692654583776
+}
+
+
 interface SessionUserExtended extends User{
   id:number,
   userRole:string[]
@@ -41,6 +51,19 @@ declare module "next-auth" {
 }
 
 
+export type likeType = InferSelectModel<typeof likes>
+
+export type  LikeStoreType ={
+    userLikes: likeType[],
+    userId      : number,
+    initStatus  : number,
+    stateUpdate : number,
+    initialize  :(userId:number)=>{}
+    addLike     :(app:string, bin:string, likee:number)=>void
+    removeLike  :(app:string, bin:string, likee:number)=>void
+    status      :(app:string, bin:string, likee:number)=>boolean
+
+}
 export type PostsWithUserT = {
   posts: InferSelectModel<typeof posts>,
   user:  userType|null

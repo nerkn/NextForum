@@ -1,23 +1,19 @@
-import { NextResponse } from "next/server"; 
+import { NextRequest, NextResponse } from "next/server"; 
 import { uploadImage } from "@/lib/services/images"; 
 import { ReturnError, ReturnNormal } from "@/lib/utils";
 import {userAvatarUpdate} from '@/lib/services/user' 
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
+import { formDataFileBufferType } from "@/lib/types";
 
 
-export const POST = async (req: { formData: () => any; }, res: any) => {
+export const POST = async (req:NextRequest, res: any) => {
   let session = await getServerSession(authOptions );
   if(!session || !session.userId)
     return ReturnError('session cant found')
   const formData = await req.formData();
-  const file = formData.get("file");
-  const fileAim = formData.get("aim") || 'normal'
-  console.log('file', file) /*size: 116819,
-                                type: 'image/jpeg',
-                                name: 'WhatsApp Image 2023-06-13 at 3.59.22 PM.jpg',
-                                lastModified: 1692654583776
-                                */ 
+  const file    = formData.get("file") as formDataFileBufferType;
+  const fileAim = formData.get("aim") || 'normal' 
   if (!file) {
     return NextResponse.json({ error: "No files received." }, { status: 400 });
   }

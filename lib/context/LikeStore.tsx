@@ -1,25 +1,10 @@
-import { InferSelectModel } from "drizzle-orm";
-import { create } from "zustand"; 
-import {likes } from "@/drizzle/schema"
-import { FetchRequestType } from "../types";
+import { create } from "zustand";  
+import { FetchRequestType, LikeStoreType, likeType } from "../types";
 
 
-export type likeType = InferSelectModel<typeof likes>
-
-export type  likeStoreType ={
-    userLikes: likeType[],
-    userId      : number,
-    initStatus  : number,
-    stateUpdate : number,
-    initialize  :(userId:number)=>{}
-    addLike     :(app:string, bin:string, likee:number)=>void
-    removeLike  :(app:string, bin:string, likee:number)=>void
-    status      :(app:string, bin:string, likee:number)=>boolean
-
-}
 
 
-export const LikeStore = create<likeStoreType>()( 
+export const LikeStore = create<LikeStoreType>()( 
         (set, get)=>({
             userLikes:[], 
             userId:0,
