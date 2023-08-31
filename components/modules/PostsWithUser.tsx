@@ -2,7 +2,7 @@ import { fmtDate } from "@/lib/utils";
 import { OneUser } from "../user/oneUser";
 import { ButtonLike } from "../gen/buttonLike";
 import { Button } from "../ui/button";
-import { HeartIcon } from "lucide-react";
+import { HeartIcon, Trash2Icon, Undo } from "lucide-react";
 import { PostsWithUserT } from "@/lib/types";
 
 export function PostsWithUser({posts}:{posts:PostsWithUserT[]}) {
@@ -26,9 +26,17 @@ export function PostsWithUser({posts}:{posts:PostsWithUserT[]}) {
                                </Button>
                 />
             </div>
-            <ButtonLike app="posts" bin="hide" likee={t.posts.id}
-                positiveChild=<Button variant="secondary" className="shrink-0 hideParent px-4">Revive</Button>
-                absentChild=<Button variant="secondary" className="shrink-0 px-4">X</Button>
+            <ButtonLike 
+                app     = "posts" 
+                bin     = "hide" 
+                likee   = {t.posts.id}
+                positiveChild = <Button variant="secondary" className="shrink-0 px-4">
+                        <Undo  />
+                    </Button>
+
+                absentChild=<Button variant="secondary" className="shrink-0 px-4">
+                        <Trash2Icon  />
+                    </Button>
              />
              
         </div>

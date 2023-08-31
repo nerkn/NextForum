@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev -p 3017",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 3017",
     "lint": "next lint",
     "dbGet": "drizzle-kit introspect:mysql",
     "dbPush": "drizzle-kit push:mysql",

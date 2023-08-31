@@ -49,7 +49,7 @@ import Link from "next/link"
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
             <DropdownMenuItem >
-              <Link href="profile/userinfo"   >Profile
+              <Link href="/profile/userinfo"   >Profile
               <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
               </Link>
             </DropdownMenuItem>

@@ -23,6 +23,11 @@ Authorization: Client-ID DqsqgzFiQ3KCLL29vzA3jbxPyG2w9-nZRkXI_DB-I1w
 
 
 
+###
+GET http://localhost:3017/api/likes/posts?likeIds=23,1,2,3
+
+
+
 
 
 ###             Likes

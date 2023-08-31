@@ -1,13 +1,14 @@
 
-import { UserType, user } from "@/drizzle/schema";  
+import {  user } from "@/drizzle/schema";  
 import { create } from "zustand"; 
+import { userType } from "../types";
 
 
 type SuggestionStoreType = {
-    friends:UserType[]
-    currentPage:UserType[]
-    add7CurrentPage:(users:UserType[])=>void,
-    gatherFriendList:(users?:UserType[])=>void
+    friends:userType[]
+    currentPage:userType[]
+    add7CurrentPage:(users:userType[])=>void,
+    gatherFriendList:(users?:userType[])=>void
 
 }
 

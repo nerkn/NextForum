@@ -6,13 +6,14 @@ import { inArray, eq } from "drizzle-orm";
 import { posts, topics, user } from "@/drizzle/schema";
 import { ReturnError, ReturnNormal } from "@/lib/utils";
 import { NextRequest } from "next/server";
+import { map } from "zod";
 
 
 
 export async function GET(
     request: NextRequest,
     { params }: { params: { app: string }} ){
-        const likeIds = request.nextUrl.searchParams.get("likeIds");
+        const likeIds = request.nextUrl.searchParams.get("likeIds")||'';
         if(!likeIds)
             ReturnError('what')
         switch(params.app){ 
@@ -25,7 +26,7 @@ export async function GET(
                     from(posts).                    
                     innerJoin(topics, eq(topics.id, posts.topic)).
                     innerJoin(user, eq(user.id, posts.user)).
-                    where(inArray(posts.id, likeIds?.split(',')) ))
+                    where(inArray(posts.id, likeIds?.split(',').map(i=>+i)) ))
             default:
                 return ReturnError('cant understand request')
         }
