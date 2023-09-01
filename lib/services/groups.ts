@@ -39,7 +39,10 @@ export async function getGroupUsers(groupIds:number[]) {
   where(inArray(userToGroups.groupId, groupIds))
   
 }
-
+export async function GroupDefinitionFromSlug(slug:string) {
+  let group = await db.select().from(groups).where(eq(groups.slug, slug)).execute()
+  return group[0]
+}
 
 export async function getGroupTopics(slug:string) {
   console.log('getGroupTopics slug is ', slug)

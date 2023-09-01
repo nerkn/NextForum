@@ -4,7 +4,9 @@ import { ChangeEvent, FormEventHandler, useState } from "react"
 import { useToast } from "../ui/use-toast"
 import { Button } from "../ui/button"
 import Tiptap from "./tiktapEditor/tiktapEditor" 
-import { userType } from "@/lib/types"
+import { FetchRequestType, userType } from "@/lib/types"
+import { revalidatePath } from "next/cache"
+import { usePathname } from "next/navigation"
 
 type formData = {
     id?:number
@@ -28,10 +30,21 @@ export function Editor({ type, data, mentionUsers}:{
        const onSlugChange = () =>(e:ChangeEvent<HTMLInputElement>)=>sluggerSet(slugify(e.target.value))
        const action = `/api/${type}`
        const {toast} = useToast() 
+       const currentPath =  usePathname()
+       console.log('currentPath', currentPath)
+       //revalidatePath()
+       function formSubmitSuccess(r:FetchRequestType<any>){
+        console.log(r)
+            toast({title:'Added', description:r?r.msg:'Post has been added'})
+            return true;
+       }
        
        
     return <form 
-                onSubmit={formSubmit()} 
+                onSubmit={formSubmit(
+                    formSubmitSuccess,
+                    (e)=>{toast({title:'Error', description:e}) }
+                    )} 
                 key={data?.id||new Date().toString().slice(0,18)} 
                 action={action}
                 className="  mb-2 p-4 flex flex-col space-y-2"
@@ -50,5 +63,6 @@ export function Editor({ type, data, mentionUsers}:{
              />
         <textarea value={desc} readOnly={true} name="description" className="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"></textarea>
         <Button type="submit" value="Submit" className="" variant="default" > Submit</Button>
+        <a onClick={()=>toast({title:"where is it", description:"where is toaster"})} >Oh toaster</a>
     </form>
 }

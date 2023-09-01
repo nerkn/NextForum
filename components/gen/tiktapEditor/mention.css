@@ -23,6 +23,7 @@
   }
   .tiptap {
     padding: .5em;
+    min-height: 5em;
   }
   .tiptap > * + * {
     margin-top: 0.75em;

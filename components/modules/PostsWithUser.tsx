@@ -30,7 +30,7 @@ export function PostsWithUser({posts}:{posts:PostsWithUserT[]}) {
                 app     = "posts" 
                 bin     = "hide" 
                 likee   = {t.posts.id}
-                positiveChild = <Button variant="secondary" className="shrink-0 px-4">
+                positiveChild = <Button variant="secondary" className="shrink-0 px-4 hideParent">
                         <Undo  />
                     </Button>
 

@@ -13,13 +13,18 @@ Group
         Manage Users
         Topics
         Posts
+        Frontpage Change
     Users
     Topics
+        Nested Topics
         Posts
+            Delete Post (user admin)
+            Edit Post 
 Profile
     Personal Page
         link to public me
     UserPages
+    FriendList
     Messages
         Userlist
 
@@ -29,5 +34,7 @@ Common Functionality
         Video Support
         Mention user links
     
-
+User Management
+    Ban login/ban posting/throttle users, user can post many messages
+    publishing free/audit posts
 

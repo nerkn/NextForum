@@ -3,6 +3,7 @@ import { type ClassValue, clsx } from "clsx"
 import { NextResponse } from "next/server"
 import { FormEvent } from "react"
 import { twMerge } from "tailwind-merge"
+import { FetchRequestType } from "./types"
  
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -27,7 +28,7 @@ export function slugify(str:string) {
 
 export function formSubmit(
   callback=console.log, 
-  error=()=>{}) {
+  error=(r:string|any)=>{}) {
     return (event:FormEvent<HTMLFormElement> & {
       target:HTMLElement&{
         action:string,
@@ -48,7 +49,13 @@ export function formSubmit(
                   }, emptyRec)
           )
         }
-        ).then(callback).catch(error)
+        ).then(r=>r.json()).then((r:FetchRequestType<any>)=>{
+          if(r.err) {
+            error(r.msg)
+            return false;
+          }
+           callback(r)
+        }).catch(error)
     }
 }
 
