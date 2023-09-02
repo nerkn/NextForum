@@ -16,14 +16,31 @@ userToGroups()
 /* Returns user groups
 */
 export type GroupMemberShipType = 'member'| 'admin'
+type UserToGroupsReturn = "OnlyUserIds"|"UserIdsMembership"|"All"
 
 export async function groupsOfUser(userId:number) {
     return await likesOfUser(userId, 'groups', 'member')
 }
-export async function usersOfGroup(groupId:number) {
-    return (await db.select({u:likes.user}).from(likes).
-            where(eq(likes.app,'groups')).
-            where(eq(likes.likee, groupId))).map(u=>u.u)
+
+export type UsersOfGroupOnlyUserIds         = number[]
+export type UsersOfGroupUserIdsMembership = {
+        user: number;
+        membership: string;
+    }[]
+
+export async function usersOfGroup(groupId:number, userToGroupsReturn:UserToGroupsReturn="OnlyUserIds"):Promise<UsersOfGroupOnlyUserIds|UsersOfGroupUserIdsMembership> {
+    let result  = (await db.select({user:likes.user, bin:likes.bin}).
+                    from(likes).
+                    where(eq(likes.app,'groups')).
+                    where(eq(likes.likee, groupId)))
+    switch(userToGroupsReturn){
+        default:
+        case "OnlyUserIds":
+                return result.map(u=>u.user)
+        case "UserIdsMembership":
+            return result.map(u=>({user:u.user, membership:u.bin}))
+            
+    }
     
 }
 export async function adminOfGroup(groupid:number, userId:number){

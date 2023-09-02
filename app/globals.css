@@ -67,6 +67,7 @@ h2{ font-size: 1.8em; }
 h3{ font-size: 1.6em; }
 h4{ font-size: 1.2em; }
 
+a{ @apply cursor-pointer }
 
     .oneTopic{
       @apply border-[1px] rounded-md mb-2 p-4 flex items-start
@@ -102,5 +103,15 @@ h4{ font-size: 1.2em; }
     padding: 0.1rem 0.3rem;
   }
   .button{
-    @apply inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90
+    @apply text-sm font-medium text-muted-foreground transition-colors rounded-sm
+    hover:text-primary-foreground hover:border p-4
+  }
+  .borderOver{
+    @apply border border-transparent
+  }
+  .borderOver:hover{
+    @apply border-primary
+  }
+  .buttonOutline{
+
   }
