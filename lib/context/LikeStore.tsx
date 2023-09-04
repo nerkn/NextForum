@@ -1,5 +1,6 @@
 import { create } from "zustand";  
-import { FetchRequestType, LikeStoreType, likeType } from "../types";
+import { FetchRequestType, LikeStoreType } from "../types";
+import { likeTI } from "../types.db";
 
 
 
@@ -17,7 +18,7 @@ export const LikeStore = create<LikeStoreType>()(
                 set({initStatus:1})
                 fetch('/api/likes?user='+userId).
                     then(r=>r.json()).
-                    then((r:FetchRequestType<likeType[]>)=>{
+                    then((r:FetchRequestType<likeTI[]>)=>{
                         if(r.err)
                             return console.log('error gethering user likes', r.err, r)
                         set({initStatus:2})

@@ -5,6 +5,7 @@ import { NextRequest } from "next/server";
  export async function GET(request:NextRequest) {
     let sp =  request.nextUrl.searchParams
     let user = parseInt(sp.get('user')||'')
+    console.log('likes of user user ', user)
     if(!user)
         ReturnError('user?')
     let data = await likesOfUser(user)

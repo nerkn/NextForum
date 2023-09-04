@@ -1,6 +1,7 @@
 import { groups, topics,posts,  user, userToGroups } from "@/drizzle/schema"
 import { db } from "../db"
-import { desc, eq, inArray } from "drizzle-orm"    
+import { InferSelectModel, desc, eq, inArray } from "drizzle-orm"    
+import { userType } from "../types"
 /*
 const result = await db.select({
     id: users.id,
@@ -43,6 +44,17 @@ export async function GroupDefinitionFromSlug(slug:string) {
   let group = await db.select().from(groups).where(eq(groups.slug, slug)).execute()
   return group[0]
 }
+
+export type TopicWithUser = {
+  topics: InferSelectModel<typeof topics>,
+  user:   userType
+}
+
+export type GroupAndTopics ={
+  group:  InferSelectModel<typeof groups>;
+  topics : TopicWithUser[];
+} | null
+
 
 export async function getGroupTopics(slug:string) {
   console.log('getGroupTopics slug is ', slug)

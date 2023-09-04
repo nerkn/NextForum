@@ -1,4 +1,4 @@
-import { InferSelectModel } from "drizzle-orm"
+import { topicsTI, topicsT,  likeTI, postsT } from "./types.db"
 
 export type FetchRequestType<T> ={
     err:number,
@@ -19,16 +19,13 @@ interface SessionUserExtended extends User{
   id:number,
   userRole:string[]
 }
-
-//export type userType= InferSelectModel<typeof user>
+ 
 export type userType= {
   id:number,
   name:string,
   avatar:string|null
   image?:string
 }
-
-
 
 declare global {
     // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -51,10 +48,9 @@ declare module "next-auth" {
 }
 
 
-export type likeType = InferSelectModel<typeof likes>
 
 export type  LikeStoreType ={
-    userLikes: likeType[],
+    userLikes   : likeTI[],
     userId      : number,
     initStatus  : number,
     stateUpdate : number,
@@ -65,6 +61,7 @@ export type  LikeStoreType ={
 
 }
 export type PostsWithUserT = {
-  posts: InferSelectModel<typeof posts>,
-  user:  userType|null
+  posts: postsT,
+  topics?: topicsT,
+  user:  userType|null|undefined
 }

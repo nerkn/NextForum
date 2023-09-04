@@ -1,12 +1,12 @@
 import { posts } from "@/drizzle/schema"
 import { db } from "@/lib/db"
 import { TipTap2HTML } from "@/lib/services/tiktapToHTML"
+import { postsTI } from "@/lib/types.db"
 import { ReturnError, ReturnNormal } from "@/lib/utils"
 import { authOptions } from "@/pages/api/auth/[...nextauth]"
-import { InferInsertModel, InferSelectModel } from "drizzle-orm"
+import {   eq } from "drizzle-orm"
 import { getServerSession } from "next-auth"
 import { NextRequest } from "next/server"
-type postsType = InferInsertModel<typeof posts>
 
 export async function POST(request:NextRequest) { 
     const session = await getServerSession(authOptions) 
@@ -21,7 +21,7 @@ export async function POST(request:NextRequest) {
         description:string, 
         group:number,
         topic:number} = await request.json() 
-    let values:postsType = {
+    let values:postsTI = {
         description:TipTap2HTML(description),
         archive:0, secret:0, starred:0, selected:0,
         group,
@@ -34,4 +34,13 @@ export async function POST(request:NextRequest) {
         values(values).execute() 
 return ReturnNormal('', response);
     
+}
+
+export async function DELETE(request:NextRequest) {
+    const session = await getServerSession(authOptions) 
+    if(!session?.userId)
+        return ReturnError('session not found')
+    const {postId}:{postId:number} = await request.json() 
+    let response =  await db.delete(posts).where(eq(posts.id, postId))
+    return ReturnNormal('', response)    
 }

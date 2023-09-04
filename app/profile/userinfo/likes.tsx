@@ -29,5 +29,5 @@ export  function Likes({app, bin}:{app:string, bin?:string}){
     
     if(!likedPosts.length)
         return <>No likes</>
-    return <PostsWithUser posts={likedPosts} />
+    return <PostsWithUser posts={likedPosts} type="normal" />
 }

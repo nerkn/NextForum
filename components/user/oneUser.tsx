@@ -5,7 +5,7 @@ import { HomeIcon, MessagesSquareIcon } from "lucide-react"
 
 
 
-export function OneUser({u, className}:{u: userType|null, className?:string}){
+export function OneUser({u, className}:{u: userType|null|undefined, className?:string}){
     if(!u)
         u= {id:0, avatar:'https://cdn.auth0.com/avatars/default.png', name:'Deleted User', }
     let img = u.image?u.image:(u.avatar?u.avatar:'https://i.pravatar.cc/150?img='+ (u.id %70))

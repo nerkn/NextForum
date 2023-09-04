@@ -32,7 +32,7 @@ export default async function Page({params}:{params:{slug:string}}) {
         <div className="mb-8">
             <h1>{currentTopic[0].name}</h1>
             <p>{currentTopic[0].description}</p>
-            <PostsWithUser posts={posts} />
+            <PostsWithUser posts={posts} type="normal" />
             <Places3 fillers={[
                 <></>, 
                 <Editor data={{

@@ -1,20 +1,8 @@
-import { OneUser } from "@/components/user/oneUser";
-import { groups, topics } from "@/drizzle/schema";
-import { getGroupTopics } from "@/lib/services/groups";
-import { userType, FetchRequestType } from "@/lib/types";
-import { fmtDate } from "@/lib/utils";
-import { InferSelectModel } from "drizzle-orm";  
+import { OneUser } from "@/components/user/oneUser"; 
+import { GroupAndTopics, TopicWithUser, getGroupTopics } from "@/lib/services/groups"; 
+import { fmtDate } from "@/lib/utils"; 
 import AdminPages from "./adminPages";
 import AdminMenu from "./adminMenu";
-
-type TopicWithUser = {
-    topics: InferSelectModel<typeof topics>,
-    user:   userType
-}
-type GroupAndTopics ={
-    group:  InferSelectModel<typeof groups>;
-    topics : TopicWithUser[];
-} | null
 
 
 function Topics({topics}:{topics:TopicWithUser[]}) {
@@ -49,10 +37,9 @@ export default async function Page({params}:{params:{slug:string}}) {
             <h1>{groupAndTopics.group.name}</h1>
             <AdminPages 
                 groupId={groupAndTopics.group.id}   
-                admin=<AdminMenu root={'/group/'+groupAndTopics.group.slug} type='admin' />
-                member=<AdminMenu root={'/group/'+groupAndTopics.group.slug} type='member' />
-                
-                notma=<div>Apply for entrance</div>
+                admin  =<AdminMenu root={'/group/'+groupAndTopics.group.slug} type='admin' />
+                member =<AdminMenu root={'/group/'+groupAndTopics.group.slug} type='member' />                
+                notma  =<div>Join this group</div>
                 />
             </div>
             <div className="my-2 py-2 border-b">{groupAndTopics.group.description}</div>

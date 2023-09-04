@@ -1,4 +1,4 @@
-import { likes, user } from "@/drizzle/schema"
+import { likes} from "@/drizzle/schema"
 import { db } from "../db"
 import { and, eq  } from "drizzle-orm"
 import { getSession } from "./user"
@@ -7,13 +7,13 @@ import { Now } from "../utils"
 
 
 
-export async function likesOfUser(userid:number, app?:string, bin?:string) {
+export async function likesOfUser(userId:number, app?:string, bin?:string) {
     let chain = db.select().from(likes)
     if(bin)
         chain = chain.where(eq(likes.bin, bin))
     if(app)
         chain = chain.where(eq(likes.app, app))
-    return await chain.where(eq(likes.user, user)).execute()
+    return await chain.where(eq(likes.user, userId)).execute()
 }
 
 export async function likesInsert(likee:number, app:string, bin:string) {    

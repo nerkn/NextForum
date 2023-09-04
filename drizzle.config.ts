@@ -5,7 +5,7 @@ console.log('process.env.MYSQL', process.env.MYSQL)
 
 export default {
     schema: "./drizzle/schema.ts",
-    out: "./drizzle",
+    out: "./drizzle/migrations",
     driver:"mysql2",
     dbCredentials:{
         connectionString: process.env.MYSQL||''
