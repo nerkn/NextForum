@@ -10,7 +10,7 @@ User Profiles
 
 Group
     Admin Pages
-        Manage Users
+        Manage Users +
         Topics
         Posts
         Frontpage Change
@@ -32,7 +32,7 @@ Common Functionality
     Editor
         Upload Image
         Video Support
-        Mention user links
+        mentions should popup user info
     
 User Management
     Ban login/ban posting/throttle users, user can post many messages
