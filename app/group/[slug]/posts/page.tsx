@@ -3,6 +3,8 @@ import { posts, topics, user } from "@/drizzle/schema"
 import { desc, eq, inArray } from "drizzle-orm"
 import { db } from "@/lib/db"
 import { PostsWithUser } from "@/components/modules/PostsWithUser"
+import { Suspense } from "react"
+import { Loading } from "@/components/gen/Loading"
 
 
 
@@ -34,6 +36,10 @@ export default async function Page({params}:{params:{slug:string}}) {
         return <h1>Groups cant found!</h1>
     const postList = await PostList(groupAndTopics?.group.id) 
 
-    return <div><PostsWithUser posts={postList} type="adminPages" /></div>
+    return <div>
+        <Suspense fallback=<Loading /> >
+        <PostsWithUser posts={postList} type="adminPages" />
+        </Suspense>
+        </div>
 
 }

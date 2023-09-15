@@ -31,20 +31,7 @@ export default async function Page({params}:{params:{slug:string}}) {
     if(!groupAndTopics)
         return <></>
     return <div>
-        <div></div>
-        <div>
-            <div className="flex space-x-2 justify-between " >
-            <h1>{groupAndTopics.group.name}</h1>
-            <AdminPages 
-                groupId={groupAndTopics.group.id}   
-                admin  =<AdminMenu root={'/group/'+groupAndTopics.group.slug} type='admin' />
-                member =<AdminMenu root={'/group/'+groupAndTopics.group.slug} type='member' />                
-                notma  =<div>Join this group</div>
-                />
-            </div>
-            <div className="my-2 py-2 border-b">{groupAndTopics.group.description}</div>
-            <Topics topics={groupAndTopics.topics} />
-        </div>
+            <Topics topics={groupAndTopics.topics} /> 
     </div>
     
     

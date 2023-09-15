@@ -19,6 +19,7 @@ import { authStore } from "@/lib/context/auth"
 import { DropdownMenuItem, DropdownMenuLabel } from "../ui/dropdown-menu"
 import useStore from "@/lib/useStore"
 import { LikeStore } from "@/lib/context/LikeStore"
+import { useEffect } from "react"
  
 const formSchema = z.object({
   email: z.string().email().min(2, {
@@ -30,7 +31,7 @@ const formSchema = z.object({
 export function UserNavMenuLogin() {
   const auth = useStore( authStore, (s=>({RequestLogin:s.RequestLogin, user:s.user, login:s.login, logout:s.Logout })))
   
-  const likes = LikeStore(s=>({initialize: s.initialize}))
+  const likes = LikeStore(s=>({initialize: s.initialize, destorize:s.destorize}))
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -38,7 +39,14 @@ export function UserNavMenuLogin() {
       password: ""
     },
   })
-  
+
+  useEffect(()=>{
+    if(auth?.user?.userId){
+      likes.initialize(auth?.user?.userId)
+    }else{
+      likes.destorize()
+    }
+  }, [auth?.user?.userId]) 
  
 
 if(!auth)

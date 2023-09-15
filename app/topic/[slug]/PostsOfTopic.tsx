@@ -5,6 +5,7 @@ import { Editor } from "@/components/gen/editor";
 import { Places3 } from "@/components/gen/scheletons/Places3"; 
 import { PostsWithUser } from "@/components/modules/PostsWithUser";
 import { getPosts, getTopic7slug } from "@/lib/services/groups";
+import UserOnly from "@/components/UserOnly";
 
 
 
@@ -35,6 +36,7 @@ export default async function Page({params}:{params:{slug:string}}) {
             <PostsWithUser posts={posts} type="normal" />
             <Places3 fillers={[
                 <></>, 
+                <UserOnly>
                 <Editor data={{
                     description:'',             
                     topic:currentTopic[0].id, 
@@ -43,7 +45,9 @@ export default async function Page({params}:{params:{slug:string}}) {
                 }} 
                 type="posts" 
                 mentionUsers={users}
-                 />,
+                 />
+                 </UserOnly>
+                 ,
                 <></>]} 
             />
             

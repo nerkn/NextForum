@@ -25,6 +25,36 @@ findFirst
 export function getGroupsUser(userId:number){
     return db.select().from(userToGroups).where(eq(userToGroups.userId, userId)).execute()
 }
+ 
+type groupType ={
+  id:number,
+  name:string,
+  slug:string|null,
+  description:string,
+  createdAt:string
+}
+type groupsWUsers ={
+  user_to_groups: {
+      "userId": number,
+      "groupId": number,
+      "description": string|null
+  },
+  "groups": typeof groups,
+  "user": userType
+} 
+export type PublicGroupsT = {
+  popularGroups:groupType[]
+  popularGroupUsers:groupsWUsers[]
+}
+export async function  publicGroups():Promise<PublicGroupsT>{
+    let popularGroups       = await getGroupsPopular() 
+    let popularGroupIds     = popularGroups.map(p=>p.id)
+    let popularGroupUsers   = await getGroupUsers(popularGroupIds)
+    return   {
+        popularGroups,
+        popularGroupUsers        
+        }
+}
 export async function getGroupsPopular(){
     return  db.select().from(groups).
                 where(eq(groups.secret, 0 )).
@@ -33,11 +63,18 @@ export async function getGroupsPopular(){
     
 }
 
-export async function getGroupUsers(groupIds:number[]) {
-  return db.select().from(userToGroups).
-  innerJoin(groups, eq(userToGroups.groupId, groups.id )).
-  innerJoin(user, eq(userToGroups.userId, user.id)).
-  where(inArray(userToGroups.groupId, groupIds))
+export async function getGroupUsers(groupIds:number[]):Promise<groupsWUsers[]> {
+  // @ts-ignore
+  return db.select({
+                    user_to_groups:userToGroups, 
+                    groups, 
+                    user:{id:user.id, avatar:user.avatar, name:user.name }
+                  })
+          .from(userToGroups).
+          innerJoin(groups, eq(userToGroups.groupId, groups.id )).
+          innerJoin(user, eq(userToGroups.userId, user.id)).
+          where(inArray(userToGroups.groupId, groupIds)).
+          execute()
   
 }
 export async function GroupDefinitionFromSlug(slug:string) {

@@ -6,6 +6,7 @@ import { OneUser } from "@/components/user/oneUser"
 import { Button } from "@/components/ui/button"
 import { MembershipCUD, MembershipR } from "./memberShipCRUD"
 import { apiGroupsMembersMembershipAllUsersType } from "@/app/api/groups/members/route"
+import { Loading } from "@/components/gen/Loading"
 
 
 
@@ -42,8 +43,10 @@ export default function ExistingMembers({groupId}:{groupId:number}){
     } ,[])
  
     if(!users)
-        return <div className="flex mt-2 flex-wrap gap-2"></div> 
-    return   <div className="flex mt-2 flex-wrap gap-2">
+        return <div className="flex mt-2 flex-wrap gap-2">
+                    <Loading />
+                </div> 
+    return <div className="flex mt-2 flex-wrap gap-2"> 
                 <MemberSearchResult users={users.users} membership={users.membership} groupId={groupId} />
-            </div> 
+           </div> 
 }

@@ -1,6 +1,4 @@
-import { usersOfGroup } from "@/lib/services/groupUsers"
 import { GroupDefinitionFromSlug } from "@/lib/services/groups"
-import { userType } from "@/lib/types"; 
 import Form from "./form";
 import ExistingMembers from "./ExistingMembers";
  

@@ -5,7 +5,6 @@ import { useToast } from "../ui/use-toast"
 import { Button } from "../ui/button"
 import Tiptap from "./tiktapEditor/tiktapEditor" 
 import { FetchRequestType, userType } from "@/lib/types"
-import { revalidatePath } from "next/cache"
 import { usePathname } from "next/navigation"
 
 type formData = {
@@ -61,7 +60,7 @@ export function Editor({ type, data, mentionUsers}:{
             onUpdate={({editor})=>descSet(JSON.stringify(editor.getJSON()))}
             readOnly={false}
              />
-        <textarea value={desc} readOnly={true} name="description" className="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"></textarea>
+        <textarea value={desc} readOnly={true} name="description" className="notflex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 hidden"></textarea>
         <Button type="submit" value="Submit" className="" variant="default" > Submit</Button>
         <a onClick={()=>toast({title:"where is it", description:"where is toaster"})} >Oh toaster</a>
     </form>

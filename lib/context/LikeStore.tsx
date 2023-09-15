@@ -1,3 +1,4 @@
+"use client"
 import { create } from "zustand";  
 import { FetchRequestType, LikeStoreType } from "../types";
 import { likeTI } from "../types.db";
@@ -11,11 +12,15 @@ export const LikeStore = create<LikeStoreType>()(
             userId:0,
             initStatus:0,
             stateUpdate:0,
+            destorize: ()=>{            
+                console.log('likestore destyoed')     
+                set({initStatus:0, userLikes:[], userId:0})
+            },
             initialize:async (userId)=>{
                 console.log('like store initializing', userId)
                 if(get().initStatus != 0)
                     return console.log('initin baska asamasinda')
-                set({initStatus:1})
+                set({initStatus:1, userId})
                 fetch('/api/likes?user='+userId).
                     then(r=>r.json()).
                     then((r:FetchRequestType<likeTI[]>)=>{

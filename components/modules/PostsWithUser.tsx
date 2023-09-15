@@ -11,7 +11,7 @@ import { ButtonDelete } from "../gen/buttonDelete";
 function TopicHeader({topic}:{topic?:{name:string, slug?:string|null}}){
     if(!topic)
         return <></>
-    return <h3>Topic: <a href={"/topics/"+topic.slug}>{topic.name}</a></h3>
+    return <h3><sup>Topic:</sup> <a href={"/topics/"+topic.slug}>{topic.name}</a></h3>
 }
 
 

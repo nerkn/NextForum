@@ -54,6 +54,7 @@ export type  LikeStoreType ={
     userId      : number,
     initStatus  : number,
     stateUpdate : number,
+    destorize   :()=>void,
     initialize  :(userId:number)=>{}
     addLike     :(app:string, bin:string, likee:number)=>void
     removeLike  :(app:string, bin:string, likee:number)=>void

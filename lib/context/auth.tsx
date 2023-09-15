@@ -23,6 +23,11 @@ export type  authStoreType ={
 
 }
 
+/*
+
+  const {login,  user } = authStore(s=>({login:s.login, user:s.user}))
+  */
+
 export const authStore = create<authStoreType>()(
     persist(
         (set, get)=>({
